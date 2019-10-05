@@ -10,7 +10,7 @@ namespace TikTakToe.Engine
 {
     public class Game
     {
-        public Game GenerateNewGame(string playerXName, string playerOName)
+        public Game GenerateNewGame(string playerXName, string playerOName, string connection)
         {
             PlayerXName = playerXName;
             PlayerOName = playerOName;
@@ -20,7 +20,7 @@ namespace TikTakToe.Engine
             Board = new GameBoard();
             Moves = new List<PlayerMove>();
 
-            this.Id = NewGame();
+            this.Id = NewGame(connection);
             return this;
         }
 
@@ -68,24 +68,105 @@ namespace TikTakToe.Engine
             }
         }
 
-        public Game StartNew()
+        public Game GetGameByID(int gameID, string connection)
         {
-            throw new NotImplementedException();
+            using (var conn = new SQLiteConnection(connection))
+            {
+                conn.Open();
+                Game gameId = conn.Query<Game>(
+                    @"SELECT Id, PlayerXName, PlayerOName, PlayerXID, PlayerOID, GameState, Winner
+                        FROM Games WHERE Id = @Id", new { @Id = gameID }
+                    ).SingleOrDefault();
+
+                return gameId;
+            }
         }
 
-        public Game GetGameByID(int gameID)
+        public MoveResult Move(string xoro, int whichSquare, string playerID, int gameID, string connection)
         {
-            throw new NotImplementedException();
+            Players whichPlayer = ConvertXorOToPlayer(xoro);
+            Game theGame = GetGameByID(gameID, connection);
+
+            if (theGame == null)
+            {
+                throw new ArgumentException("Bad game id");
+            }
+
+            switch (whichPlayer)
+            {
+                case Players.None:
+                    throw new ArgumentException("Bad player");                    
+                case Players.X:
+                    if (theGame.PlayerXID != playerID)
+                    {
+                        throw new ArgumentException("Bad player id");
+                    }
+                    break;
+                case Players.O:
+                    if (theGame.PlayerOID != playerID)
+                    {
+                        throw new ArgumentException("Bad player id");
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            string currentBoard = Board.RenderBoard();
+            MoveResult mr = Board.ExecuteTurn(xoro, whichSquare);
+
+            if (mr.IsValid)
+            {
+                PlayerMove playerMove = new PlayerMove();
+                playerMove.GameboardBefore = currentBoard;
+                playerMove.GameID = this.Id;
+                playerMove.GameboardAfter = Board.RenderBoard();
+                playerMove.Square = whichSquare;
+                playerMove.Timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                playerMove.Player = whichPlayer;
+
+                InsertMove(playerMove, connection);
+
+                return mr;
+            }
+            else
+            {
+                throw new InvalidOperationException($"Illegal Move. Reason: {mr.Reason}, Game Board:{mr.GameBoard}");
+            }
         }
 
-        public void Move(Players player, int whichSquare)
+        private Players ConvertXorOToPlayer(string xoro)
         {
-
+            switch (xoro)
+            {
+                case "X":
+                    return Players.X;
+                case "O":
+                    return Players.O;
+                default:
+                    return Players.None;
+            }
         }
 
-        private int NewGame()
+        private int InsertMove(PlayerMove playerMove, string connection)
         {
-            using (var conn = new SQLiteConnection("Data Source=C:\\ProgramData\\PostmanDeliversData\\GameDB.sqlite3;Version=3;"))
+            using (var conn = new SQLiteConnection(connection))
+            {
+                conn.Open();
+                int moveId = conn.Query<int>(
+                    @"INSERT INTO PlayerMoves
+                        (GameID, Square, GameBoardAfter, GameBoardBefore, Timestamp, Player) 
+                        VALUES (@GameID, @Square, @GameBoardAfter, @GameBoardBefore, @Timestamp, @Player);
+                        select last_insert_rowid();", playerMove
+                    ).First();
+
+                return moveId;
+            }
+        }
+
+        private int NewGame(string connection)
+        {
+            using (var conn = new SQLiteConnection(connection))
             {
                 conn.Open();
                 int gameId = conn.Query<int>(
@@ -95,7 +176,7 @@ namespace TikTakToe.Engine
                         select last_insert_rowid();", this
                     ).First();
 
-                return gameId;               
+                return gameId;
             }
         }
 
