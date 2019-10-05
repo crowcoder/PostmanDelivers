@@ -1,0 +1,17 @@
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\bin\Debug\netcoreapp2.2\TikTakToe.Engine.Tests.deps.json
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\bin\Debug\netcoreapp2.2\TikTakToe.Engine.Tests.runtimeconfig.json
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\bin\Debug\netcoreapp2.2\TikTakToe.Engine.Tests.runtimeconfig.dev.json
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\bin\Debug\netcoreapp2.2\TikTakToe.Engine.Tests.dll
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\bin\Debug\netcoreapp2.2\TikTakToe.Engine.Tests.pdb
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\bin\Debug\netcoreapp2.2\TikTakToe.Engine.dll
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\bin\Debug\netcoreapp2.2\TikTakToe.Engine.pdb
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\obj\Debug\netcoreapp2.2\TikTakToe.Engine.Tests.csprojAssemblyReference.cache
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\obj\Debug\netcoreapp2.2\TikTakToe.Engine.Tests.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\obj\Debug\netcoreapp2.2\TikTakToe.Engine.Tests.AssemblyInfoInputs.cache
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\obj\Debug\netcoreapp2.2\TikTakToe.Engine.Tests.AssemblyInfo.cs
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\obj\Debug\netcoreapp2.2\TikTakToe.Engine.Tests.csproj.CopyComplete
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\obj\Debug\netcoreapp2.2\TikTakToe.Engine.Tests.dll
+C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine.Tests\obj\Debug\netcoreapp2.2\TikTakToe.Engine.Tests.pdb
