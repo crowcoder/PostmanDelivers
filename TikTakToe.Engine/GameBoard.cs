@@ -8,6 +8,11 @@ namespace TikTakToe.Engine
         private string xGlyph = "X";
         private string oGlyph = "O";
 
+        public GameBoard(string s1, string s2, string s3, string s4, string s5, string s6, string s7, string s8, string s9)
+        {
+            Squares = new string[] { s1, s2, s3, s4, s5, s6, s7, s8, s9 };
+        }
+
         public GameBoard()
         {
             Squares = new string[9];

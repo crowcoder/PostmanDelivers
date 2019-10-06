@@ -1,0 +1,17 @@
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\bin\Debug\netcoreapp2.2\PostmanDelivers.API.deps.json
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\bin\Debug\netcoreapp2.2\PostmanDelivers.API.runtimeconfig.json
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\bin\Debug\netcoreapp2.2\PostmanDelivers.API.runtimeconfig.dev.json
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\bin\Debug\netcoreapp2.2\PostmanDelivers.API.dll
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\obj\Debug\netcoreapp2.2\PostmanDelivers.API.csprojAssemblyReference.cache
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\obj\Debug\netcoreapp2.2\PostmanDelivers.API.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\obj\Debug\netcoreapp2.2\PostmanDelivers.API.RazorAssemblyInfo.cache
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\obj\Debug\netcoreapp2.2\PostmanDelivers.API.RazorAssemblyInfo.cs
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\obj\Debug\netcoreapp2.2\PostmanDelivers.API.AssemblyInfoInputs.cache
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\obj\Debug\netcoreapp2.2\PostmanDelivers.API.AssemblyInfo.cs
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\obj\Debug\netcoreapp2.2\PostmanDelivers.API.RazorTargetAssemblyInfo.cache
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\bin\Debug\netcoreapp2.2\PostmanDelivers.API.pdb
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\obj\Debug\netcoreapp2.2\PostmanDelivers.API.dll
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\obj\Debug\netcoreapp2.2\PostmanDelivers.API.pdb
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\bin\Debug\netcoreapp2.2\TikTakToe.Engine.dll
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\bin\Debug\netcoreapp2.2\TikTakToe.Engine.pdb
+C:\Users\User\source\repos\PostmanDelivers\PostmanDelivers.API\obj\Debug\netcoreapp2.2\PostmanDelivers.API.csproj.CopyComplete

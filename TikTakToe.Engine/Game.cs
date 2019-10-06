@@ -24,7 +24,7 @@ namespace TikTakToe.Engine
             return this;
         }
 
-        public int Id { get; set; }
+        public long Id { get; set; }
         public GameBoard Board { get; set; }
         public List<PlayerMove> Moves { get; set; }
 
@@ -68,21 +68,148 @@ namespace TikTakToe.Engine
             }
         }
 
-        public Game GetGameByID(int gameID, string connection)
+        public List<Game> GetAllGames(string connection)
         {
             using (var conn = new SQLiteConnection(connection))
             {
                 conn.Open();
-                Game gameId = conn.Query<Game>(
-                    @"SELECT Id, PlayerXName, PlayerOName, PlayerXID, PlayerOID, GameState, Winner
-                        FROM Games WHERE Id = @Id", new { @Id = gameID }
-                    ).SingleOrDefault();
+                var gamesResult = conn.Query(
+                    @"SELECT g.Id, g.PlayerXName, g.PlayerOName, g.PlayerXID, g.PlayerOID, g.GameState, g.Winner,
+                            g.SquareOne, g.SquareTwo, g.SquareThree, g.SquareFour, g.SquareFive,
+                            g.SquareSix, g.SquareSeven, g.SquareEight, g.SquareNine,
+	                        m.Id, m.GameID, m.Square, m.GameBoardAfter, m.GameBoardBefore, m.Timestamp, m.Player
+                        FROM Games g
+                        LEFT OUTER JOIN PlayerMoves m
+	                        ON g.Id = m.GameID
+                        ORDER BY g.ID, m.Id");
 
-                return gameId;
+                if (gamesResult != null)
+                {
+                    var theGames = gamesResult.GroupBy(g => new
+                    {
+                        g.Id,
+                        g.PlayerXName,
+                        g.PlayerOName,
+                        g.PlayerXID,
+                        g.PlayerOID,
+                        g.GameState,
+                        g.Winner,
+                        g.SquareOne,
+                        g.SquareTwo,
+                        g.SquareThree,
+                        g.SquareFour,
+                        g.SquareFive,
+                        g.SquareSix,
+                        g.SquareSeven,
+                        g.SquareEight,
+                        g.SquareNine
+                    }).Select(m => new Game
+                    {
+                        Id = m.Key.Id,
+                        PlayerXName = m.Key.PlayerXName,
+                        PlayerOName = m.Key.PlayerOName,
+                        PlayerXID = m.Key.PlayerXID,
+                        PlayerOID = m.Key.PlayerOID,
+                        Board = new GameBoard(
+                            m.Key.SquareOne,
+                            m.Key.SquareTwo,
+                            m.Key.SquareThree,
+                            m.Key.SquareFour,
+                            m.Key.SquareFive,
+                            m.Key.SquareSix,
+                            m.Key.SquareSeven,
+                            m.Key.SquareEight,
+                            m.Key.SquareNine),
+                        Moves = m.Select(mv => new PlayerMove
+                        {
+                            GameID = mv.GameID,
+                            Square = mv.Square,
+                            GameboardAfter = mv.GameBoardAfter,
+                            GameboardBefore = mv.GameBoardBefore,
+                            Timestamp = mv.Timestamp,
+                            Player = mv.Player == null ? Players.None : (Players)mv.Player
+                        }).ToList()
+                    }).ToList();
+
+                    return theGames;
+                }
+
+                return null;
             }
         }
 
-        public MoveResult Move(string xoro, int whichSquare, string playerID, int gameID, string connection)
+        public Game GetGameByID(long gameID, string connection)
+        {
+            using (var conn = new SQLiteConnection(connection))
+            {
+                conn.Open();
+                var theGame = conn.Query(
+                    @"SELECT g.Id, g.PlayerXName, g.PlayerOName, g.PlayerXID, g.PlayerOID, g.GameState, g.Winner,
+                            g.SquareOne, g.SquareTwo, g.SquareThree, g.SquareFour, g.SquareFive,
+                            g.SquareSix, g.SquareSeven, g.SquareEight, g.SquareNine,
+	                        m.Id, m.GameID, m.Square, m.GameBoardAfter, m.GameBoardBefore, m.Timestamp, m.Player
+                        FROM Games g
+                        LEFT OUTER JOIN PlayerMoves m
+	                        ON g.Id = m.GameID
+                        WHERE g.Id = @Id", new { @Id = gameID }
+                    );
+
+                if (theGame != null)
+                {
+                    var fullGame = theGame.GroupBy(g => new
+                    {
+                        g.Id,
+                        g.PlayerXName,
+                        g.PlayerOName,
+                        g.PlayerXID,
+                        g.PlayerOID,
+                        g.GameState,
+                        g.Winner,
+                        g.SquareOne,
+                        g.SquareTwo,
+                        g.SquareThree,
+                        g.SquareFour,
+                        g.SquareFive,
+                        g.SquareSix,
+                        g.SquareSeven,
+                        g.SquareEight,
+                        g.SquareNine
+                    }).Select(m => new Game
+                    {
+                        Id = m.Key.Id,
+                        PlayerXName = m.Key.PlayerXName,
+                        PlayerOName = m.Key.PlayerOName,
+                        PlayerXID = m.Key.PlayerXID,
+                        PlayerOID = m.Key.PlayerOID,
+                        Board = new GameBoard(
+                            m.Key.SquareOne, 
+                            m.Key.SquareTwo, 
+                            m.Key.SquareThree, 
+                            m.Key.SquareFour, 
+                            m.Key.SquareFive, 
+                            m.Key.SquareSix, 
+                            m.Key.SquareSeven, 
+                            m.Key.SquareEight, 
+                            m.Key.SquareNine),
+                        Moves = m.Select(mv => new PlayerMove
+                        {
+                            GameID = mv.GameID,
+                            Square = mv.Square,
+                            GameboardAfter = mv.GameBoardAfter,
+                            GameboardBefore = mv.GameBoardBefore,
+                            Timestamp = mv.Timestamp,
+                            Player = mv.Player == null ? Players.None : (Players)mv.Player
+                        }).ToList()
+                    }).SingleOrDefault();
+
+                    return fullGame;
+                }
+
+                return null;
+            }
+        }
+
+        public MoveResult Move(string xoro, int whichSquare, string playerID, long gameID, string connection)
         {
             Players whichPlayer = ConvertXorOToPlayer(xoro);
             Game theGame = GetGameByID(gameID, connection);
@@ -95,7 +222,7 @@ namespace TikTakToe.Engine
             switch (whichPlayer)
             {
                 case Players.None:
-                    throw new ArgumentException("Bad player");                    
+                    throw new ArgumentException("Bad player");
                 case Players.X:
                     if (theGame.PlayerXID != playerID)
                     {
@@ -112,26 +239,27 @@ namespace TikTakToe.Engine
                     break;
             }
 
-            string currentBoard = Board.RenderBoard();
-            MoveResult mr = Board.ExecuteTurn(xoro, whichSquare);
+            string currentBoard = theGame.Board.RenderBoard();
+            MoveResult mr = theGame.Board.ExecuteTurn(xoro, whichSquare);
 
             if (mr.IsValid)
             {
                 PlayerMove playerMove = new PlayerMove();
                 playerMove.GameboardBefore = currentBoard;
                 playerMove.GameID = this.Id;
-                playerMove.GameboardAfter = Board.RenderBoard();
+                playerMove.GameboardAfter = theGame.Board.RenderBoard();
                 playerMove.Square = whichSquare;
                 playerMove.Timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
                 playerMove.Player = whichPlayer;
 
                 InsertMove(playerMove, connection);
-
+                UpdateGameBoard(this.Id, theGame.Board.Squares, connection);
                 return mr;
             }
             else
             {
-                throw new InvalidOperationException($"Illegal Move. Reason: {mr.Reason}, Game Board:{mr.GameBoard}");
+                throw new InvalidOperationException($@"Illegal Move. Reason: {mr.Reason}, Game Board:
+{mr.GameBoard}");
             }
         }
 
@@ -145,6 +273,39 @@ namespace TikTakToe.Engine
                     return Players.O;
                 default:
                     return Players.None;
+            }
+        }
+
+        private void UpdateGameBoard(long gameId, string[] squares, string connection)
+        {
+            using (var conn = new SQLiteConnection(connection))
+            {
+                conn.Open();
+                conn.Execute(
+                    @"UPDATE Games 
+                    SET SquareOne = @SquareOne, 
+                        SquareTwo = @SquareTwo, 
+                        SquareThree = @SquareThree, 
+                        SquareFour = @SquareFour, 
+                        SquareFive = @SquareFive, 
+                        SquareSix = @SquareSix, 
+                        SquareSeven = @SquareSeven, 
+                        SquareEight = @SquareEight, 
+                        SquareNine = @SquareNine
+                    WHERE Id = @Id", new
+                    {
+                        @Id = gameId,
+                        @SquareOne = squares[0],
+                        @SquareTwo = squares[1],
+                        @SquareThree = squares[2],
+                        @SquareFour = squares[3],
+                        @SquareFive = squares[4],
+                        @SquareSix = squares[5],
+                        @SquareSeven = squares[6],
+                        @SquareEight = squares[7],
+                        @SquareNine = squares[8]
+                    }
+                    );
             }
         }
 
