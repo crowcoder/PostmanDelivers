@@ -1,8 +1,8 @@
--- Script Date: 10/5/2019 6:26 PM  - ErikEJ.SqlCeScripting version 3.5.2.81
+-- Script Date: 10/6/2019 3:14 PM  - ErikEJ.SqlCeScripting version 3.5.2.81
 -- Database information:
 -- Database: C:\ProgramData\PostmanDeliversData\GameDB.sqlite3
 -- ServerVersion: 3.27.2
--- DatabaseSize: 16 KB
+-- DatabaseSize: 32 KB
 -- Created: 10/5/2019 4:02 PM
 
 -- User Table information:
@@ -30,6 +30,15 @@ CREATE TABLE [Games] (
 , [PlayerOID] text NOT NULL
 , [GameState] bigint NOT NULL
 , [Winner] bigint NOT NULL
+, [SquareOne] text NULL
+, [SquareTwo] text NULL
+, [SquareThree] text NULL
+, [SquareFour] text NULL
+, [SquareFive] text NULL
+, [SquareSix] text NULL
+, [SquareSeven] text NULL
+, [SquareEight] text NULL
+, [SquareNine] text NULL
 );
 COMMIT;
 

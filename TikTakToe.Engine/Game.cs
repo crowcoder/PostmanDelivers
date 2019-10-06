@@ -246,14 +246,14 @@ namespace TikTakToe.Engine
             {
                 PlayerMove playerMove = new PlayerMove();
                 playerMove.GameboardBefore = currentBoard;
-                playerMove.GameID = this.Id;
+                playerMove.GameID = theGame.Id;
                 playerMove.GameboardAfter = theGame.Board.RenderBoard();
                 playerMove.Square = whichSquare;
                 playerMove.Timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
                 playerMove.Player = whichPlayer;
 
                 InsertMove(playerMove, connection);
-                UpdateGameBoard(this.Id, theGame.Board.Squares, connection);
+                UpdateGameBoard(theGame.Id, theGame.Board.Squares, connection);
                 return mr;
             }
             else

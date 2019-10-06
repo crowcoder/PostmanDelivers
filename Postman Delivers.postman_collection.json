@@ -1,0 +1,1124 @@
+{
+	"info": {
+		"_postman_id": "8f3765a5-93fd-46e7-a42b-4547f4d66b85",
+		"name": "Postman Delivers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Happy Path",
+			"item": [
+				{
+					"name": "Generate New Game",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "eb04b227-5d6b-4048-bf61-a286119f1b6c",
+								"exec": [
+									"",
+									"const responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.environment.set(\"happy_path_game_id\", responseJson.id);",
+									"pm.environment.set(\"happy_path_playerx_id\", responseJson.playerXID);",
+									"pm.environment.set(\"happy_path_playero_id\", responseJson.playerOID);",
+									"pm.environment.set(\"happy_path_playerx_name\", responseJson.playerXName);",
+									"pm.environment.set(\"happy_path_playero_name\", responseJson.playerOName);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\"Bob\", \"Janel\"]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/Game",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Game"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Generate New Game",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\"Bob\", \"Janel\"]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/Game",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Game"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2019 17:37:03 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Location",
+									"value": "https://localhost:5001/api/Game/30"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 30,\n    \"board\": {\n        \"squares\": [\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null\n        ],\n        \"winner\": null\n    },\n    \"moves\": [],\n    \"playerXName\": \"Bob\",\n    \"playerXID\": \"nyIC8fduHXIqywtE\",\n    \"playerOName\": \"Janel\",\n    \"playerOID\": \"8HeuRqMruw7OGDHyTPkYLhxmZp\",\n    \"winner\": 0,\n    \"gameState\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "X Move To [1]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "38b2ade3-795f-47ca-9c30-707c5ef0a3b2",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Move is valid\", () => {",
+									"   pm.expect(responseJson.isValid).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"Game is in progress\", () => {",
+									"   pm.expect(responseJson.gameIsOver).to.be.false; ",
+									"});",
+									"",
+									"pm.test(\"Move is valid so reason is null\", () => {",
+									"   pm.expect(responseJson.reason).to.be.null; ",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 1,\n\t\"playerID\" : \"{{happy_path_playerx_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/Move",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Move"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "X Move To [1]",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 1,\n\t\"playerID\" : \"{{happy_path_playerx_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/Move",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Move"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2019 18:02:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isValid\": true,\n    \"gameIsOver\": false,\n    \"reason\": null,\n    \"gameBoard\": \"[     ]     [  X  ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Game By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "97ad4eef-99b5-4a4d-896e-7e63d3bd14ab",
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const responseJson = pm.response.json();",
+									"",
+									"const game_id = pm.environment.get(\"happy_path_game_id\");",
+									"",
+									"pm.test(`The game id is ${game_id}`, () => {",
+									"   pm.expect(game_id).to.eq(responseJson.id);",
+									"});",
+									"",
+									"pm.test(\"Square 1 is null\", () => {",
+									"   pm.expect(responseJson.board.squares[0]).to.be.null; ",
+									"});",
+									"",
+									"pm.test(\"Square 2 is an X\", () => {",
+									"   pm.expect(\"X\").to.eq(responseJson.board.squares[1]); ",
+									"});",
+									"",
+									"for(let i = 2; i < 9; i++) {",
+									"    pm.test(`Square ${i} is null`, () => {",
+									"        pm.expect(responseJson.board.squares[i]).to.be.null; ",
+									"    });",
+									"}",
+									"",
+									"pm.test(\"Board winner is null\", () => {",
+									"   pm.expect(responseJson.board.winner).to.be.null; ",
+									"});",
+									"",
+									"pm.test(\"Game has only one move\", () => {",
+									"   pm.expect(1).to.eq(responseJson.moves.length); ",
+									"});",
+									"",
+									"pm.test(`Move game id is ${game_id}`, () => {",
+									"    pm.expect(game_id).to.eq(responseJson.moves[0].gameID);",
+									"});",
+									"",
+									"pm.test(\"Move used square 1\", () => {",
+									"   pm.expect(1).to.eq(responseJson.moves[0].square);",
+									"});",
+									"",
+									"pm.test(\"Player was X\", () => {",
+									"   pm.expect(1).to.eq(responseJson.moves[0].player);",
+									"});",
+									"",
+									"const playerxname = pm.environment.get(\"happy_path_playerx_name\");",
+									"pm.test(`Player X Name is ${playerxname}`, () => {",
+									"   pm.expect(playerxname).to.eq(responseJson.playerXName); ",
+									"});",
+									"",
+									"const playeroname = pm.environment.get(\"happy_path_playero_name\");",
+									"pm.test(`Player O Name is ${playeroname}`, () => {",
+									"   pm.expect(playeroname).to.eq(responseJson.playerOName); ",
+									"});",
+									"",
+									"const playerxid = pm.environment.get(\"happy_path_playerx_id\");",
+									"pm.test(`Player X id is ${playerxid}`, () => {",
+									"    pm.expect(playerxid).to.eq(responseJson.playerXID);",
+									"});",
+									"",
+									"const playeroid = pm.environment.get(\"happy_path_playero_id\");",
+									"pm.test(`Player O id is ${playeroid}`, () => {",
+									"    pm.expect(playeroid).to.eq(responseJson.playerOID);",
+									"});",
+									"",
+									"pm.test(\"Game winner is zero (None)\", () => {",
+									"   pm.expect(0).to.eq(responseJson.winner); ",
+									"});",
+									"",
+									"pm.test(\"Game state is in progress\", () => {",
+									"   pm.expect(1).to.eq(responseJson.gameState) ;",
+									"});",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/Game/{{happy_path_game_id}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Game",
+								"{{happy_path_game_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Game with one Move",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/Game/{{happy_path_game_id}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Game",
+										"{{happy_path_game_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2019 18:28:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 46,\n    \"board\": {\n        \"squares\": [\n            null,\n            \"X\",\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null\n        ],\n        \"winner\": null\n    },\n    \"moves\": [\n        {\n            \"gameID\": 46,\n            \"square\": 1,\n            \"gameboardBefore\": \"[     ]     [     ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\",\n            \"gameboardAfter\": \"[     ]     [  X  ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\",\n            \"timestamp\": 1570386515,\n            \"player\": 1\n        }\n    ],\n    \"playerXName\": \"Bob\",\n    \"playerXID\": \"SibDaxfPfIYRqmHF\",\n    \"playerOName\": \"Janel\",\n    \"playerOID\": \"ZRXH9TLbcc0ithGb\",\n    \"winner\": 0,\n    \"gameState\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "O Move To [3]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "38b2ade3-795f-47ca-9c30-707c5ef0a3b2",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Move is valid\", () => {",
+									"   pm.expect(responseJson.isValid).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"Game is in progress\", () => {",
+									"   pm.expect(responseJson.gameIsOver).to.be.false; ",
+									"});",
+									"",
+									"pm.test(\"Move is valid so reason is null\", () => {",
+									"   pm.expect(responseJson.reason).to.be.null; ",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"xoro\" : \"O\",\n\t\"whichSquare\" : 3,\n\t\"playerID\" : \"{{happy_path_playero_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/Move",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Move"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "O moves to square occupied by X",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 1,\n\t\"playerID\" : \"{{happy_path_playerx_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/Move",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Move"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2019 19:00:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "Illegal Move. Reason: The square is already occupied by X. Turn aborted, try again., Game Board:\r\n[     ]     [  X  ]     [     ]\r\n\r\n[     ]     [     ]     [     ]\r\n\r\n[     ]     [     ]     [     ]"
+						},
+						{
+							"name": "X Move To [1]",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 1,\n\t\"playerID\" : \"{{happy_path_playerx_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/Move",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Move"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2019 18:02:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isValid\": true,\n    \"gameIsOver\": false,\n    \"reason\": null,\n    \"gameBoard\": \"[     ]     [  X  ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\"\n}"
+						}
+					]
+				},
+				{
+					"name": "X Move To [0]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "38b2ade3-795f-47ca-9c30-707c5ef0a3b2",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Move is valid\", () => {",
+									"   pm.expect(responseJson.isValid).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"Game is in progress\", () => {",
+									"   pm.expect(responseJson.gameIsOver).to.be.false; ",
+									"});",
+									"",
+									"pm.test(\"Move is valid so reason is null\", () => {",
+									"   pm.expect(responseJson.reason).to.be.null; ",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 0,\n\t\"playerID\" : \"{{happy_path_playerx_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/Move",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Move"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "X Move To [1]",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 1,\n\t\"playerID\" : \"{{happy_path_playerx_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/Move",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Move"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2019 18:02:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isValid\": true,\n    \"gameIsOver\": false,\n    \"reason\": null,\n    \"gameBoard\": \"[     ]     [  X  ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\"\n}"
+						}
+					]
+				},
+				{
+					"name": "O Move To [7]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "38b2ade3-795f-47ca-9c30-707c5ef0a3b2",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Move is valid\", () => {",
+									"   pm.expect(responseJson.isValid).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"Game is in progress\", () => {",
+									"   pm.expect(responseJson.gameIsOver).to.be.false; ",
+									"});",
+									"",
+									"pm.test(\"Move is valid so reason is null\", () => {",
+									"   pm.expect(responseJson.reason).to.be.null; ",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"xoro\" : \"O\",\n\t\"whichSquare\" : 7,\n\t\"playerID\" : \"{{happy_path_playero_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/Move",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Move"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "X Move To [1]",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 1,\n\t\"playerID\" : \"{{happy_path_playerx_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/Move",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Move"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2019 18:02:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isValid\": true,\n    \"gameIsOver\": false,\n    \"reason\": null,\n    \"gameBoard\": \"[     ]     [  X  ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\"\n}"
+						}
+					]
+				},
+				{
+					"name": "X Move To [2]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "38b2ade3-795f-47ca-9c30-707c5ef0a3b2",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Move is valid\", () => {",
+									"   pm.expect(responseJson.isValid).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"Game is in progress\", () => {",
+									"   pm.expect(responseJson.gameIsOver).to.be.true; ",
+									"});",
+									"",
+									"pm.test(\"Move is valid so reason is null\", () => {",
+									"   pm.expect(responseJson.reason).to.eq(\"Game is Over. Congratulations to X\"); ",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 2,\n\t\"playerID\" : \"{{happy_path_playerx_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/Move",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Move"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "X Move To [1]",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 1,\n\t\"playerID\" : \"{{happy_path_playerx_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/Move",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Move"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2019 18:02:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isValid\": true,\n    \"gameIsOver\": false,\n    \"reason\": null,\n    \"gameBoard\": \"[     ]     [  X  ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get End Game",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "97ad4eef-99b5-4a4d-896e-7e63d3bd14ab",
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const responseJson = pm.response.json();",
+									"",
+									"const game_id = pm.environment.get(\"happy_path_game_id\");",
+									"",
+									"pm.test(`The game id is ${game_id}`, () => {",
+									"   pm.expect(game_id).to.eq(responseJson.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/Game/{{happy_path_game_id}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Game",
+								"{{happy_path_game_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Game with one Move",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/Game/{{happy_path_game_id}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Game",
+										"{{happy_path_game_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2019 18:28:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 46,\n    \"board\": {\n        \"squares\": [\n            null,\n            \"X\",\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null\n        ],\n        \"winner\": null\n    },\n    \"moves\": [\n        {\n            \"gameID\": 46,\n            \"square\": 1,\n            \"gameboardBefore\": \"[     ]     [     ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\",\n            \"gameboardAfter\": \"[     ]     [  X  ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\",\n            \"timestamp\": 1570386515,\n            \"player\": 1\n        }\n    ],\n    \"playerXName\": \"Bob\",\n    \"playerXID\": \"SibDaxfPfIYRqmHF\",\n    \"playerOName\": \"Janel\",\n    \"playerOID\": \"ZRXH9TLbcc0ithGb\",\n    \"winner\": 0,\n    \"gameState\": 1\n}"
+						}
+					]
+				}
+			],
+			"description": "This folder contains requests that play an entire Tic Tac Toe game start to finish without errors.",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Get All Games",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/Game",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"Game"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Game By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/Game/25",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"Game",
+						"25"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate New Game",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\"Bob\", \"Janel\"]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/Game",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"Game"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "X Move To [1]",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 11,\n\t\"playerID\" : \"20OvFKGSSWvNQEXpLTdbSr2Kb\",\n\t\"gameId\" : 26\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/Move",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"Move"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

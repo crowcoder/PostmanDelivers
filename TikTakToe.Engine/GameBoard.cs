@@ -205,7 +205,7 @@ namespace TikTakToe.Engine
             if (newGameStatus.gameIsOver)
             {
                 return new MoveResult(true,
-                    $"Game is Over. Congratulations to {currentGameStatus.winner}", RenderBoard(), true);
+                    $"Game is Over. Congratulations to {newGameStatus.winner}", RenderBoard(), true);
             }
 
             return new MoveResult(moveResult.isvalid, moveResult.msg, RenderBoard(), false);
