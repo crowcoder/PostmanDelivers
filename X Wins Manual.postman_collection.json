@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "8f3765a5-93fd-46e7-a42b-4547f4d66b85",
-		"name": "Postman Delivers",
+		"_postman_id": "e2707171-dc14-44a8-8c83-4b866c570c2b",
+		"name": "X Wins Manual",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Happy Path",
+			"name": "HappyPath",
 			"item": [
 				{
 					"name": "Generate New Game",
@@ -16,18 +16,6 @@
 							"script": {
 								"id": "eb04b227-5d6b-4048-bf61-a286119f1b6c",
 								"exec": [
-									"",
-									"const responseJson = pm.response.json();",
-									"",
-									"pm.test(\"Status code is 201\", function () {",
-									"    pm.response.to.have.status(201);",
-									"});",
-									"",
-									"pm.environment.set(\"happy_path_game_id\", responseJson.id);",
-									"pm.environment.set(\"happy_path_playerx_id\", responseJson.playerXID);",
-									"pm.environment.set(\"happy_path_playero_id\", responseJson.playerOID);",
-									"pm.environment.set(\"happy_path_playerx_name\", responseJson.playerXName);",
-									"pm.environment.set(\"happy_path_playero_name\", responseJson.playerOName);",
 									""
 								],
 								"type": "text/javascript"
@@ -54,11 +42,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseurl}}/Game",
+							"raw": "https://localhost:5001/api/Game",
+							"protocol": "https",
 							"host": [
-								"{{baseurl}}"
+								"localhost"
 							],
+							"port": "5001",
 							"path": [
+								"api",
 								"Game"
 							]
 						}
@@ -133,24 +124,6 @@
 							"script": {
 								"id": "38b2ade3-795f-47ca-9c30-707c5ef0a3b2",
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"const responseJson = pm.response.json();",
-									"",
-									"pm.test(\"Move is valid\", () => {",
-									"   pm.expect(responseJson.isValid).to.be.true;",
-									"});",
-									"",
-									"pm.test(\"Game is in progress\", () => {",
-									"   pm.expect(responseJson.gameIsOver).to.be.false; ",
-									"});",
-									"",
-									"pm.test(\"Move is valid so reason is null\", () => {",
-									"   pm.expect(responseJson.reason).to.be.null; ",
-									"});",
-									"",
 									""
 								],
 								"type": "text/javascript"
@@ -169,7 +142,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 1,\n\t\"playerID\" : \"{{happy_path_playerx_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
+							"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 1,\n\t\"playerID\" : \"--\",\n\t\"gameId\" : 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -177,11 +150,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseurl}}/Move",
+							"raw": "https://localhost:5001/api/Move",
+							"protocol": "https",
 							"host": [
-								"{{baseurl}}"
+								"localhost"
 							],
+							"port": "5001",
 							"path": [
+								"api",
 								"Move"
 							]
 						}
@@ -252,92 +228,6 @@
 							"script": {
 								"id": "97ad4eef-99b5-4a4d-896e-7e63d3bd14ab",
 								"exec": [
-									"pm.test(\"Status code is 200\", () => {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"const responseJson = pm.response.json();",
-									"",
-									"const game_id = pm.environment.get(\"happy_path_game_id\");",
-									"",
-									"pm.test(`The game id is ${game_id}`, () => {",
-									"   pm.expect(game_id).to.eq(responseJson.id);",
-									"});",
-									"",
-									"pm.test(\"Square 1 is null\", () => {",
-									"   pm.expect(responseJson.board.squares[0]).to.be.null; ",
-									"});",
-									"",
-									"pm.test(\"Square 2 is an X\", () => {",
-									"   pm.expect(\"X\").to.eq(responseJson.board.squares[1]); ",
-									"});",
-									"",
-									"for(let i = 2; i < 9; i++) {",
-									"    pm.test(`Square ${i} is null`, () => {",
-									"        pm.expect(responseJson.board.squares[i]).to.be.null; ",
-									"    });",
-									"}",
-									"",
-									"pm.test(\"Board winner is null\", () => {",
-									"   pm.expect(responseJson.board.winner).to.be.null; ",
-									"});",
-									"",
-									"pm.test(\"Game has only one move\", () => {",
-									"   pm.expect(1).to.eq(responseJson.moves.length); ",
-									"});",
-									"",
-									"pm.test(`Move game id is ${game_id}`, () => {",
-									"    pm.expect(game_id).to.eq(responseJson.moves[0].gameID);",
-									"});",
-									"",
-									"pm.test(\"Move used square 1\", () => {",
-									"   pm.expect(1).to.eq(responseJson.moves[0].square);",
-									"});",
-									"",
-									"pm.test(\"Player was X\", () => {",
-									"   pm.expect(1).to.eq(responseJson.moves[0].player);",
-									"});",
-									"",
-									"const playerxname = pm.environment.get(\"happy_path_playerx_name\");",
-									"pm.test(`Player X Name is ${playerxname}`, () => {",
-									"   pm.expect(playerxname).to.eq(responseJson.playerXName); ",
-									"});",
-									"",
-									"const playeroname = pm.environment.get(\"happy_path_playero_name\");",
-									"pm.test(`Player O Name is ${playeroname}`, () => {",
-									"   pm.expect(playeroname).to.eq(responseJson.playerOName); ",
-									"});",
-									"",
-									"const playerxid = pm.environment.get(\"happy_path_playerx_id\");",
-									"pm.test(`Player X id is ${playerxid}`, () => {",
-									"    pm.expect(playerxid).to.eq(responseJson.playerXID);",
-									"});",
-									"",
-									"const playeroid = pm.environment.get(\"happy_path_playero_id\");",
-									"pm.test(`Player O id is ${playeroid}`, () => {",
-									"    pm.expect(playeroid).to.eq(responseJson.playerOID);",
-									"});",
-									"",
-									"pm.test(\"Game winner is zero (None)\", () => {",
-									"   pm.expect(0).to.eq(responseJson.winner); ",
-									"});",
-									"",
-									"pm.test(\"Game state is in progress\", () => {",
-									"   pm.expect(1).to.eq(responseJson.gameState) ;",
-									"});",
-									"",
-									"",
-									"",
-									"",
-									"",
-									"",
-									"",
-									"",
-									"",
-									"",
-									"",
-									"",
-									"",
 									""
 								],
 								"type": "text/javascript"
@@ -348,13 +238,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseurl}}/Game/{{happy_path_game_id}}",
+							"raw": "https://localhost:5001/api/Game/28",
+							"protocol": "https",
 							"host": [
-								"{{baseurl}}"
+								"localhost"
 							],
+							"port": "5001",
 							"path": [
+								"api",
 								"Game",
-								"{{happy_path_game_id}}"
+								"28"
 							]
 						}
 					},
@@ -409,24 +302,6 @@
 							"script": {
 								"id": "38b2ade3-795f-47ca-9c30-707c5ef0a3b2",
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"const responseJson = pm.response.json();",
-									"",
-									"pm.test(\"Move is valid\", () => {",
-									"   pm.expect(responseJson.isValid).to.be.true;",
-									"});",
-									"",
-									"pm.test(\"Game is in progress\", () => {",
-									"   pm.expect(responseJson.gameIsOver).to.be.false; ",
-									"});",
-									"",
-									"pm.test(\"Move is valid so reason is null\", () => {",
-									"   pm.expect(responseJson.reason).to.be.null; ",
-									"});",
-									"",
 									""
 								],
 								"type": "text/javascript"
@@ -445,7 +320,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"xoro\" : \"O\",\n\t\"whichSquare\" : 3,\n\t\"playerID\" : \"{{happy_path_playero_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
+							"raw": "{\n\t\"xoro\" : \"O\",\n\t\"whichSquare\" : 3,\n\t\"playerID\" : \"--\",\n\t\"gameId\" : 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -453,71 +328,19 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseurl}}/Move",
+							"raw": "https://localhost:5001/api/Move",
+							"protocol": "https",
 							"host": [
-								"{{baseurl}}"
+								"localhost"
 							],
+							"port": "5001",
 							"path": [
+								"api",
 								"Move"
 							]
 						}
 					},
 					"response": [
-						{
-							"name": "O moves to square occupied by X",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 1,\n\t\"playerID\" : \"{{happy_path_playerx_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseurl}}/Move",
-									"host": [
-										"{{baseurl}}"
-									],
-									"path": [
-										"Move"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "plain",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Sun, 06 Oct 2019 19:00:43 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "text/plain; charset=utf-8"
-								},
-								{
-									"key": "Server",
-									"value": "Kestrel"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								}
-							],
-							"cookie": [],
-							"body": "Illegal Move. Reason: The square is already occupied by X. Turn aborted, try again., Game Board:\r\n[     ]     [  X  ]     [     ]\r\n\r\n[     ]     [     ]     [     ]\r\n\r\n[     ]     [     ]     [     ]"
-						},
 						{
 							"name": "X Move To [1]",
 							"originalRequest": {
@@ -572,6 +395,61 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"isValid\": true,\n    \"gameIsOver\": false,\n    \"reason\": null,\n    \"gameBoard\": \"[     ]     [  X  ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\\r\\n\\r\\n[     ]     [     ]     [     ]\"\n}"
+						},
+						{
+							"name": "O moves to square occupied by X",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 1,\n\t\"playerID\" : \"{{happy_path_playerx_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/Move",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Move"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2019 19:00:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "Illegal Move. Reason: The square is already occupied by X. Turn aborted, try again., Game Board:\r\n[     ]     [  X  ]     [     ]\r\n\r\n[     ]     [     ]     [     ]\r\n\r\n[     ]     [     ]     [     ]"
 						}
 					]
 				},
@@ -583,24 +461,6 @@
 							"script": {
 								"id": "38b2ade3-795f-47ca-9c30-707c5ef0a3b2",
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"const responseJson = pm.response.json();",
-									"",
-									"pm.test(\"Move is valid\", () => {",
-									"   pm.expect(responseJson.isValid).to.be.true;",
-									"});",
-									"",
-									"pm.test(\"Game is in progress\", () => {",
-									"   pm.expect(responseJson.gameIsOver).to.be.false; ",
-									"});",
-									"",
-									"pm.test(\"Move is valid so reason is null\", () => {",
-									"   pm.expect(responseJson.reason).to.be.null; ",
-									"});",
-									"",
 									""
 								],
 								"type": "text/javascript"
@@ -619,7 +479,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 0,\n\t\"playerID\" : \"{{happy_path_playerx_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
+							"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 0,\n\t\"playerID\" : \"--\",\n\t\"gameId\" : 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -627,11 +487,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseurl}}/Move",
+							"raw": "https://localhost:5001/api/Move",
+							"protocol": "https",
 							"host": [
-								"{{baseurl}}"
+								"localhost"
 							],
+							"port": "5001",
 							"path": [
+								"api",
 								"Move"
 							]
 						}
@@ -746,11 +609,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseurl}}/Move",
+							"raw": "https://localhost:5001/api/Move",
+							"protocol": "https",
 							"host": [
-								"{{baseurl}}"
+								"localhost"
 							],
+							"port": "5001",
 							"path": [
+								"api",
 								"Move"
 							]
 						}
@@ -821,24 +687,6 @@
 							"script": {
 								"id": "38b2ade3-795f-47ca-9c30-707c5ef0a3b2",
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"const responseJson = pm.response.json();",
-									"",
-									"pm.test(\"Move is valid\", () => {",
-									"   pm.expect(responseJson.isValid).to.be.true;",
-									"});",
-									"",
-									"pm.test(\"Game is in progress\", () => {",
-									"   pm.expect(responseJson.gameIsOver).to.be.true; ",
-									"});",
-									"",
-									"pm.test(\"Move is valid so reason is null\", () => {",
-									"   pm.expect(responseJson.reason).to.eq(\"Game is Over. Congratulations to X\"); ",
-									"});",
-									"",
 									""
 								],
 								"type": "text/javascript"
@@ -857,7 +705,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 2,\n\t\"playerID\" : \"{{happy_path_playerx_id}}\",\n\t\"gameId\" : {{happy_path_game_id}}\n}",
+							"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 2,\n\t\"playerID\" : \"--\",\n\t\"gameId\" : 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -865,11 +713,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseurl}}/Move",
+							"raw": "https://localhost:5001/api/Move",
+							"protocol": "https",
 							"host": [
-								"{{baseurl}}"
+								"localhost"
 							],
+							"port": "5001",
 							"path": [
+								"api",
 								"Move"
 							]
 						}
@@ -940,77 +791,27 @@
 							"script": {
 								"id": "97ad4eef-99b5-4a4d-896e-7e63d3bd14ab",
 								"exec": [
-									"",
-									"const responseJson = pm.response.json();",
-									"",
-									"let moves = responseJson.moves;",
-									"",
-									"let game = [];",
-									"",
-									"let previous_move = { \"one\": \" \", \"two\": \" \", \"three\": \" \", \"four\": \" \", \"five\": \" \", \"six\": \" \", \"seven\": \" \", \"eight\": \" \", \"nine\": \" \"};",
-									"",
-									"for(let i = 0; i < moves.length; i++){",
-									"    ",
-									"    let player = moves[i].player === 1 ? 'X' : 'O';",
-									"    ",
-									"    let this_move =  {",
-									"        \"one\": moves[i].square === 0 ? player : previous_move.one,",
-									"        \"two\": moves[i].square === 1 ? player : previous_move.two,",
-									"        \"three\": moves[i].square === 2 ? player : previous_move.three,",
-									"        \"four\": moves[i].square === 3 ? player : previous_move.four,",
-									"        \"five\": moves[i].square === 4 ? player : previous_move.five,",
-									"        \"six\": moves[i].square === 5 ? player : previous_move.six,",
-									"        \"seven\": moves[i].square === 6 ? player : previous_move.seven,",
-									"        \"eight\": moves[i].square === 7 ? player : previous_move.eight,",
-									"        \"nine\": moves[i].square === 8 ? player : previous_move.nine",
-									"    };",
-									"    previous_move = this_move;",
-									"    game.push(this_move);",
-									"}",
+									"const response = pm.response.json();",
 									"",
 									"let tmplt = `",
-									"    <style>",
-									"        td.btm-rt {",
-									"            border-right: 2px solid blue;",
-									"            border-bottom: 2px solid blue;",
-									"        }",
-									"        td.btm {",
-									"            border-bottom: 2px solid blue;",
-									"        }",
-									"        td.lf-rt {",
-									"            border-right: 2px solid blue;",
-									"            border-left: 2px solid blue;",
-									"        }",
-									"        td {",
-									"            padding: 10px; ",
-									"            width: 2em; ",
-									"            height: 2em;",
-									"            font-size:2em;",
-									"            text-align:center;",
-									"            vertical-align: center;",
-									"        }",
-									"    </style>",
-									"  {{#each response}}",
 									"    <table>",
-									"        <tr><td class=\"btm-rt\">{{one}}</td><td class=\"btm-rt\">{{two}}</td><td class=\"btm\">{{three}}</td></tr>",
-									"        <tr><td class=\"btm-rt\">{{four}}</td><td class=\"btm-rt\">{{five}}</td><td class=\"btm\">{{six}}</td></tr>",
-									"        <tr><td>{{seven}}</td><td class=\"lf-rt\">{{eight}}</td><td>{{nine}}</td></tr>",
-									"    </table>",
-									"    <br />",
-									"{{/each}}`;",
+									"        <tr><td>{{one}}</td><td>{{two}}</td><td>{{three}}</td></tr>",
+									"        <tr><td>{{four}}</td><td>{{five}}</td><td>{{six}}</td></tr>",
+									"        <tr><td>{{seven}}</td><td>{{eight}}</td><td>{{nine}}</td></tr>",
+									"    </table>`;",
 									"    ",
-									"pm.visualizer.set(tmplt, {response: game});",
-									"",
-									"pm.test(\"Status code is 200\", () => {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"const game_id = pm.environment.get(\"happy_path_game_id\");",
-									"",
-									"pm.test(`The game id is ${game_id}`, () => {",
-									"   pm.expect(game_id).to.eq(responseJson.id);",
-									"});",
-									""
+									"pm.visualizer.set(tmplt, {response:",
+									"{",
+									"    'one': response.board.squares[0],",
+									"    'two': response.board.squares[1],",
+									"    'three': response.board.squares[2],",
+									"    'four': response.board.squares[3],",
+									"    'five': response.board.squares[4],",
+									"    'six': response.board.squares[5],",
+									"    'seven': response.board.squares[6],",
+									"    'eight': response.board.squares[7],",
+									"    'nine': response.board.squares[8]",
+									"}});"
 								],
 								"type": "text/javascript"
 							}
@@ -1020,13 +821,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseurl}}/Game/{{happy_path_game_id}}",
+							"raw": "https://localhost:5001/api/Game/0",
+							"protocol": "https",
 							"host": [
-								"{{baseurl}}"
+								"localhost"
 							],
+							"port": "5001",
 							"path": [
+								"api",
 								"Game",
-								"{{happy_path_game_id}}"
+								"0"
 							]
 						}
 					},
@@ -1075,108 +879,51 @@
 				}
 			],
 			"description": "This folder contains requests that play an entire Tic Tac Toe game start to finish without errors.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "582b492f-fce6-4833-963f-c4082a962d3c",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c4d32cd0-c1fc-4139-a677-5d631cbbe403",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
 			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ad074354-4057-44cf-b534-aa1274321e46",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		},
 		{
-			"name": "Get All Games",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseurl}}/Game",
-					"host": [
-						"{{baseurl}}"
-					],
-					"path": [
-						"Game"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Game By ID",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseurl}}/Game/25",
-					"host": [
-						"{{baseurl}}"
-					],
-					"path": [
-						"Game",
-						"25"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Generate New Game",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "[\"Bob\", \"Janel\"]",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseurl}}/Game",
-					"host": [
-						"{{baseurl}}"
-					],
-					"path": [
-						"Game"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "X Move To [1]",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"xoro\" : \"X\",\n\t\"whichSquare\" : 11,\n\t\"playerID\" : \"20OvFKGSSWvNQEXpLTdbSr2Kb\",\n\t\"gameId\" : 26\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseurl}}/Move",
-					"host": [
-						"{{baseurl}}"
-					],
-					"path": [
-						"Move"
-					]
-				}
-			},
-			"response": []
+			"listen": "test",
+			"script": {
+				"id": "5f6cd255-8013-4b00-95cb-acf18dcb197b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"protocolProfileBehavior": {}
