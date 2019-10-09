@@ -1,9 +1,0 @@
-C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine\bin\Debug\netcoreapp2.2\TikTakToe.Engine.deps.json
-C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine\bin\Debug\netcoreapp2.2\TikTakToe.Engine.dll
-C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine\bin\Debug\netcoreapp2.2\TikTakToe.Engine.pdb
-C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine\obj\Debug\netcoreapp2.2\TikTakToe.Engine.csprojAssemblyReference.cache
-C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine\obj\Debug\netcoreapp2.2\TikTakToe.Engine.csproj.CoreCompileInputs.cache
-C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine\obj\Debug\netcoreapp2.2\TikTakToe.Engine.AssemblyInfoInputs.cache
-C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine\obj\Debug\netcoreapp2.2\TikTakToe.Engine.AssemblyInfo.cs
-C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine\obj\Debug\netcoreapp2.2\TikTakToe.Engine.dll
-C:\Users\User\source\repos\PostmanDelivers\TikTakToe.Engine\obj\Debug\netcoreapp2.2\TikTakToe.Engine.pdb
