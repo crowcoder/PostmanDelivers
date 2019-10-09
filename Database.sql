@@ -1,8 +1,8 @@
--- Script Date: 10/6/2019 3:14 PM  - ErikEJ.SqlCeScripting version 3.5.2.81
+-- Script Date: 10/8/2019 8:16 PM  - ErikEJ.SqlCeScripting version 3.5.2.81
 -- Database information:
 -- Database: C:\ProgramData\PostmanDeliversData\GameDB.sqlite3
 -- ServerVersion: 3.27.2
--- DatabaseSize: 32 KB
+-- DatabaseSize: 36 KB
 -- Created: 10/5/2019 4:02 PM
 
 -- User Table information:
