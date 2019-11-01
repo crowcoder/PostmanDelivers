@@ -16,13 +16,13 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
-    projects: '**\*.csproj'
+    projects: '**\*.sln'
     feedsToUse: 'select'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: '**/*.sln'
+    projects: '**\*.sln'
 
 - task: CmdLine@2
   inputs:
