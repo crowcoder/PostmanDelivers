@@ -28,7 +28,15 @@ steps:
       cd $(Build.SourcesDirectory)
       dir /s
 - task: PublishBuildArtifacts@1
+  displayName: 'Publish API'
   inputs:
     PathtoPublish: '$(Build.SourcesDirectory)\PostmanDelivers.API\bin\Release\netcoreapp2.2\publish.zip'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish postman scripts'
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)\*.postman*.json'
     ArtifactName: 'drop'
     publishLocation: 'Container'
