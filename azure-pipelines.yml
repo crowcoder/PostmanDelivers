@@ -24,11 +24,12 @@ steps:
   displayName: 'donet publish'
   inputs:
     command: 'publish'
+    configuration: 'Release'
     publishWebProjects: false
     projects: '**\PostmanDelivers.API.csproj'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)\PostmanDelivers.API\bin\Release\netcoreapp2.2\publish\'
+    PathtoPublish: '$(Build.SourcesDirectory)\PostmanDelivers.API\bin\Release\netcoreapp2.2\publish'
     ArtifactName: 'drop'
     publishLocation: 'Container'
