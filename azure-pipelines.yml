@@ -22,8 +22,13 @@ steps:
     projects: '**\PostmanDelivers.API.csproj'
     arguments: '--configuration Release'
 
+- task: CmdLine@2
+  inputs:
+    script: |
+      cd $(Build.SourcesDirectory)
+      dir /s
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)\PostmanDelivers.API\bin\Release\netcoreapp2.2\publish\PostmanDelivers.API'
+    PathtoPublish: '$(Build.SourcesDirectory)\PostmanDelivers.API\bin\Release\netcoreapp2.2\publish\'
     ArtifactName: 'drop'
     publishLocation: 'Container'
