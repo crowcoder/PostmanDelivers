@@ -24,7 +24,9 @@ steps:
     command: 'build'
     projects: '**/*.sln'
 
-
+- task: CmdLine@2
+  inputs:
+    script: 'dir /s'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/_crowcoder_PostmanDelivers'
