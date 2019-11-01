@@ -29,6 +29,6 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(Build.SourcesDirectory)\PostmanDelivers.API\bin\Debug\netcoreapp2.2\publish\'
     ArtifactName: 'drop'
     publishLocation: 'Container'
