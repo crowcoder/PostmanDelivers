@@ -25,7 +25,7 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: false
-    projects: '**\*.sln'
+    projects: '**\PostmanDelivers.API.csproj'
 
 - task: PublishBuildArtifacts@1
   inputs:
