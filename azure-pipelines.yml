@@ -25,6 +25,6 @@ steps:
     projects: '**/*.sln'
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/_crowcoder_PostmanDelivers'
     ArtifactName: 'drop'
     publishLocation: 'Container'
