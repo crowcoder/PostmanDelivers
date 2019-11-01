@@ -35,8 +35,21 @@ steps:
     publishLocation: 'Container'
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish postman scripts'
+  displayName: 'Publish postman collection'
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)\*.postman*.json'
-    ArtifactName: 'drop'
+    PathtoPublish: '$(Build.SourcesDirectory)\Postman Delivers.postman_collection.json'
+    ArtifactName: 'collection'
+    publishLocation: 'Container'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish postman globals'
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)\Postman Delivers.postman_globals.json'
+    ArtifactName: 'globals'
+    publishLocation: 'Container'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish postman env'
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)\PostmandDelivers HTTPS.postman_environment.json'
+    ArtifactName: 'environment'
     publishLocation: 'Container'
