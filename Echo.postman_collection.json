@@ -1,0 +1,342 @@
+{
+	"info": {
+		"_postman_id": "7b8463af-1235-40b0-8be4-d4396ee2a56a",
+		"name": "Echo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "echo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "RandomInt",
+							"value": "{{$randomInt}}",
+							"type": "text"
+						},
+						{
+							"key": "Abbreviation",
+							"value": "{{$randomAbbreviation}}",
+							"type": "text"
+						},
+						{
+							"key": "Business Image",
+							"value": "{{$randomBusinessImage}}",
+							"type": "text"
+						},
+						{
+							"key": "Catch Phrase",
+							"value": "{{$randomCatchPhrase}}",
+							"type": "text"
+						},
+						{
+							"key": "City",
+							"value": "{{$randomCity}}",
+							"type": "text"
+						},
+						{
+							"key": "Bitcoin Address",
+							"value": "{{$randomBitcoin}}",
+							"type": "text"
+						},
+						{
+							"key": "Color",
+							"value": "{{$randomColor}}",
+							"type": "text"
+						},
+						{
+							"key": "Last Name",
+							"value": "{{$randomLastName}}",
+							"type": "text"
+						},
+						{
+							"key": "Latitude",
+							"value": "{{$randomLatitude}}",
+							"type": "text"
+						},
+						{
+							"key": "Date Past",
+							"value": "{{$randomDatePast}}",
+							"type": "text"
+						},
+						{
+							"key": "Email",
+							"value": "{{$randomEmail}}",
+							"type": "text"
+						},
+						{
+							"key": "Hex Color",
+							"value": "{{$randomHexColor}}",
+							"type": "text"
+						},
+						{
+							"key": "Currency Code",
+							"value": "{{$randomCurrencyCode}}",
+							"type": "text"
+						},
+						{
+							"key": "Lorem",
+							"value": "{{$randomLoremSlug}}",
+							"type": "text"
+						},
+						{
+							"key": "Mime Type",
+							"value": "{{$randomMimeType}}",
+							"type": "text"
+						},
+						{
+							"key": "Phone Ext",
+							"value": "{{$randomPhoneNumberExt}}",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "{{$randomPassword}}",
+							"type": "text"
+						},
+						{
+							"key": "Job Description",
+							"value": "{{$randomJobDescriptor}}",
+							"type": "text"
+						},
+						{
+							"key": "Directory",
+							"value": "{{$randomDirectoryPath}}",
+							"type": "text"
+						},
+						{
+							"key": "UUID",
+							"value": "{{$randomUUID}}",
+							"type": "text"
+						},
+						{
+							"key": "Protocol",
+							"value": "{{$randomProtocol}}",
+							"type": "text"
+						},
+						{
+							"key": "MAC Address",
+							"value": "{{$randomMACAddress}}",
+							"type": "text"
+						},
+						{
+							"key": "Semver",
+							"value": "{{$randomSemver}}",
+							"type": "text"
+						},
+						{
+							"key": "Street",
+							"value": "{{$randomStreetAddress}}",
+							"type": "text"
+						},
+						{
+							"key": "IP v6",
+							"value": "{{$randomIPV6}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/Echo",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"Echo"
+					]
+				},
+				"description": "Demonstrates Postman's random data fields."
+			},
+			"response": [
+				{
+					"name": "echo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "RandomInt",
+									"value": "{{$randomInt}}",
+									"type": "text"
+								},
+								{
+									"key": "Abbreviation",
+									"value": "{{$randomAbbreviation}}",
+									"type": "text"
+								},
+								{
+									"key": "Business Image",
+									"value": "{{$randomBusinessImage}}",
+									"type": "text"
+								},
+								{
+									"key": "Catch Phrase",
+									"value": "{{$randomCatchPhrase}}",
+									"type": "text"
+								},
+								{
+									"key": "City",
+									"value": "{{$randomCity}}",
+									"type": "text"
+								},
+								{
+									"key": "Bitcoin Address",
+									"value": "{{$randomBitcoin}}",
+									"type": "text"
+								},
+								{
+									"key": "Color",
+									"value": "{{$randomColor}}",
+									"type": "text"
+								},
+								{
+									"key": "Last Name",
+									"value": "{{$randomLastName}}",
+									"type": "text"
+								},
+								{
+									"key": "Latitude",
+									"value": "{{$randomLatitude}}",
+									"type": "text"
+								},
+								{
+									"key": "Date Past",
+									"value": "{{$randomDatePast}}",
+									"type": "text"
+								},
+								{
+									"key": "Email",
+									"value": "{{$randomEmail}}",
+									"type": "text"
+								},
+								{
+									"key": "Hex Color",
+									"value": "{{$randomHexColor}}",
+									"type": "text"
+								},
+								{
+									"key": "Currency Code",
+									"value": "{{$randomCurrencyCode}}",
+									"type": "text"
+								},
+								{
+									"key": "Lorem",
+									"value": "{{$randomLoremSlug}}",
+									"type": "text"
+								},
+								{
+									"key": "Mime Type",
+									"value": "{{$randomMimeType}}",
+									"type": "text"
+								},
+								{
+									"key": "Phone Ext",
+									"value": "{{$randomPhoneNumberExt}}",
+									"type": "text"
+								},
+								{
+									"key": "Password",
+									"value": "{{$randomPassword}}",
+									"type": "text"
+								},
+								{
+									"key": "Job Description",
+									"value": "{{$randomJobDescriptor}}",
+									"type": "text"
+								},
+								{
+									"key": "Directory",
+									"value": "{{$randomDirectoryPath}}",
+									"type": "text"
+								},
+								{
+									"key": "UUID",
+									"value": "{{$randomUUID}}",
+									"type": "text"
+								},
+								{
+									"key": "Protocol",
+									"value": "{{$randomProtocol}}",
+									"type": "text"
+								},
+								{
+									"key": "MAC Address",
+									"value": "{{$randomMACAddress}}",
+									"type": "text"
+								},
+								{
+									"key": "Semver",
+									"value": "{{$randomSemver}}",
+									"type": "text"
+								},
+								{
+									"key": "Street",
+									"value": "{{$randomStreetAddress}}",
+									"type": "text"
+								},
+								{
+									"key": "IP v6",
+									"value": "{{$randomIPV6}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseurl}}/Echo",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Echo"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 15 Oct 2019 21:45:58 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"RandomInt\": \"401\",\n    \"Abbreviation\": \"COM\",\n    \"Business Image\": \"http://lorempixel.com/640/480/business\",\n    \"Catch Phrase\": \"Synergistic modular flexibility\",\n    \"City\": \"North Chyna\",\n    \"Bitcoin Address\": \"1U05W8IG6ZX78ULL20BCF64M9QSA5QA\",\n    \"Color\": \"violet\",\n    \"Last Name\": \"Bradtke\",\n    \"Latitude\": \"10.4845\",\n    \"Date Past\": \"Mon Jul 01 2019 07:17:50 GMT-0400 (Eastern Daylight Time)\",\n    \"Email\": \"Keven_Hoppe@hotmail.com\",\n    \"Hex Color\": \"#10603f\",\n    \"Currency Code\": \"NIO\",\n    \"Lorem\": \"ea-vitae-repellat\",\n    \"Mime Type\": \"application/vnd.ntt-local.sip-ta_tcp_stream\",\n    \"Phone Ext\": \"97-970-970-1249\",\n    \"Password\": \"Y6HQAba68iuQdut\",\n    \"Job Description\": \"Chief\",\n    \"Directory\": \"/mnt\",\n    \"UUID\": \"bfc5b542-c9e4-49fd-9d62-d69f3504a9fb\",\n    \"Protocol\": \"http\",\n    \"MAC Address\": \"5d:ec:dc:4c:26:65\",\n    \"Semver\": \"6.5.9\",\n    \"Street\": \"3387 Hagenes Trafficway\",\n    \"IP v6\": \"5346:36f1:066f:9e03:a5ac:ee6d:c73e:d104\"\n}"
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}
