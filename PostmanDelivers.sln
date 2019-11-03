@@ -13,10 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		CustomScript.js = CustomScript.js
 		Database.sql = Database.sql
 		Postman Delivers.postman_globals.json = Postman Delivers.postman_globals.json
-		PostmandDelivers HTTP.postman_environment.json = PostmandDelivers HTTP.postman_environment.json
-		PostmandDelivers HTTPS.postman_environment.json = PostmandDelivers HTTPS.postman_environment.json
-		Script Order.postman_collection.json = Script Order.postman_collection.json
-		ScriptOrderEnv.postman_environment.json = ScriptOrderEnv.postman_environment.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostmanDelivers.API", "PostmanDelivers.API\PostmanDelivers.API.csproj", "{6EFA36C6-1508-4116-8012-6448D0168FDA}"
