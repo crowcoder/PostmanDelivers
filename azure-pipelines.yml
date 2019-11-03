@@ -35,12 +35,6 @@ steps:
     publishLocation: 'Container'
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish postman collection'
-  inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)\Postman Delivers.postman_collection.json'
-    ArtifactName: 'collection'
-    publishLocation: 'Container'
-- task: PublishBuildArtifacts@1
   displayName: 'Publish postman globals'
   inputs:
     PathtoPublish: '$(Build.SourcesDirectory)\Postman Delivers.postman_globals.json'
@@ -48,8 +42,15 @@ steps:
     publishLocation: 'Container'
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish postman env'
+  displayName: 'Publish azure env'
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)\PostmandDelivers HTTPS.postman_environment.json'
-    ArtifactName: 'environment'
+    PathtoPublish: '$(Build.SourcesDirectory)\PostmandDelivers Azure.postman_environment.json'
+    ArtifactName: 'azure environment'
+    publishLocation: 'Container'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish test collection'
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)\X Wins With Tests.postman_collection.json'
+    ArtifactName: 'test collection'
     publishLocation: 'Container'
