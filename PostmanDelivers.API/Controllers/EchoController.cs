@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace PostmanDelivers.API.Controllers
@@ -8,6 +9,7 @@ namespace PostmanDelivers.API.Controllers
     public class EchoController : ControllerBase
     {
         [HttpPost]
+        [Authorize]
         [Consumes("application/x-www-form-urlencoded")]
         public ActionResult Post([FromForm] Dictionary<string, string> stringsToEcho)
         {

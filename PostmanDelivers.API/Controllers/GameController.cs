@@ -27,8 +27,25 @@ namespace PostmanDelivers.API.Controllers
             }
             catch (System.Exception ex)
             {
-                throw;
-            }           
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                Game g = new Game();
+                string cnxn = _config.GetValue<string>("ConnectionStr");
+                g.Delete(id, cnxn);
+                return Ok();
+            }
+            catch (System.Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpGet]

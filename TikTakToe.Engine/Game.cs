@@ -182,14 +182,14 @@ namespace TikTakToe.Engine
                         PlayerXID = m.Key.PlayerXID,
                         PlayerOID = m.Key.PlayerOID,
                         Board = new GameBoard(
-                            m.Key.SquareOne, 
-                            m.Key.SquareTwo, 
-                            m.Key.SquareThree, 
-                            m.Key.SquareFour, 
-                            m.Key.SquareFive, 
-                            m.Key.SquareSix, 
-                            m.Key.SquareSeven, 
-                            m.Key.SquareEight, 
+                            m.Key.SquareOne,
+                            m.Key.SquareTwo,
+                            m.Key.SquareThree,
+                            m.Key.SquareFour,
+                            m.Key.SquareFive,
+                            m.Key.SquareSix,
+                            m.Key.SquareSeven,
+                            m.Key.SquareEight,
                             m.Key.SquareNine),
                         Moves = m.Select(mv => new PlayerMove
                         {
@@ -338,6 +338,15 @@ namespace TikTakToe.Engine
                     ).First();
 
                 return gameId;
+            }
+        }
+
+        public void Delete(int game_id, string connection)
+        {
+            using (var conn = new SQLiteConnection(connection))
+            {
+                conn.Open();
+                conn.Execute(@"DELETE FROM Games WHERE Id = @game_id;", new { game_id });
             }
         }
 
