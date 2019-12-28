@@ -1,1 +1,1 @@
-newman run "X Wins With Tests.postman_collection.json" -e "PostmandDelivers HTTPS.postman_environment.json" --insecure
+newman run "X Wins With Tests.postman_collection.json" -e "PostmandDelivers Local.postman_environment.json" --insecure
