@@ -5,10 +5,20 @@
 			"key": "game_visualizer",
 			"value": "(function () {\n\n    build_moves = function (moves) {\n\n        let game = [];\n\n        let previous_move = { \"one\": \" \", \"two\": \" \", \"three\": \" \", \"four\": \" \", \"five\": \" \", \"six\": \" \", \"seven\": \" \", \"eight\": \" \", \"nine\": \" \" };\n\n        for (let i = 0; i < moves.length; i++) {\n\n            let player = moves[i].player === 1 ? 'X' : 'O';\n\n            let this_move = {\n                \"one\": moves[i].square === 0 ? player : previous_move.one,\n                \"two\": moves[i].square === 1 ? player : previous_move.two,\n                \"three\": moves[i].square === 2 ? player : previous_move.three,\n                \"four\": moves[i].square === 3 ? player : previous_move.four,\n                \"five\": moves[i].square === 4 ? player : previous_move.five,\n                \"six\": moves[i].square === 5 ? player : previous_move.six,\n                \"seven\": moves[i].square === 6 ? player : previous_move.seven,\n                \"eight\": moves[i].square === 7 ? player : previous_move.eight,\n                \"nine\": moves[i].square === 8 ? player : previous_move.nine\n            };\n            previous_move = this_move;\n            game.push(this_move);\n        }\n\n        return game;\n    };\n\n    let tmplt = `\n        <style>\n            td.btm-rt {\n                border-right: 2px solid blue;\n                border-bottom: 2px solid blue;\n            }\n            td.btm {\n                border-bottom: 2px solid blue;\n            }\n            td.lf-rt {\n                border-right: 2px solid blue;\n                border-left: 2px solid blue;\n            }\n            td {\n                padding: 10px; \n                width: 2em; \n                height: 2em;\n                font-size:2em;\n                text-align:center;\n                vertical-align: center;\n            }\n        </style>\n      {{#each response}}\n        <table>\n            <tr><td class=\"btm-rt\">{{one}}</td><td class=\"btm-rt\">{{two}}</td><td class=\"btm\">{{three}}</td></tr>\n            <tr><td class=\"btm-rt\">{{four}}</td><td class=\"btm-rt\">{{five}}</td><td class=\"btm\">{{six}}</td></tr>\n            <tr><td>{{seven}}</td><td class=\"lf-rt\">{{eight}}</td><td>{{nine}}</td></tr>\n        </table>\n        <br />\n    {{/each}}`;\n\n    return { BuildMoves: build_moves, Template: tmplt };\n\n})();",
 			"enabled": true
+		},
+		{
+			"key": "azure_ad_client_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "azure_ad_auth_url",
+			"value": "",
+			"enabled": true
 		}
 	],
 	"name": "Postman Delivers Globals",
 	"_postman_variable_scope": "globals",
-	"_postman_exported_at": "2019-10-09T00:13:36.571Z",
-	"_postman_exported_using": "Postman/7.8.0"
+	"_postman_exported_at": "2019-12-28T19:23:38.242Z",
+	"_postman_exported_using": "Postman/7.14.0"
 }

@@ -36,18 +36,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseurl}}/Values?order=1",
+							"raw": "{{baseurl}}/Values",
 							"host": [
 								"{{baseurl}}"
 							],
 							"path": [
 								"Values"
-							],
-							"query": [
-								{
-									"key": "order",
-									"value": "1"
-								}
 							]
 						}
 					},
@@ -81,18 +75,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseurl}}/Values?order=2",
+							"raw": "{{baseurl}}/Values",
 							"host": [
 								"{{baseurl}}"
 							],
 							"path": [
 								"Values"
-							],
-							"query": [
-								{
-									"key": "order",
-									"value": "2"
-								}
 							]
 						}
 					},
@@ -151,18 +139,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseurl}}/Values?order=2",
+					"raw": "{{baseurl}}/Values",
 					"host": [
 						"{{baseurl}}"
 					],
 					"path": [
 						"Values"
-					],
-					"query": [
-						{
-							"key": "order",
-							"value": "2"
-						}
 					]
 				}
 			},
@@ -196,18 +178,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseurl}}/Values?order=3",
+					"raw": "{{baseurl}}/Values",
 					"host": [
 						"{{baseurl}}"
 					],
 					"path": [
 						"Values"
-					],
-					"query": [
-						{
-							"key": "order",
-							"value": "3"
-						}
 					]
 				}
 			},

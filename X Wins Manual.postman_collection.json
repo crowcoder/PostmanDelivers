@@ -26,10 +26,10 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "Content-Type",
-								"name": "Content-Type",
+								"key": "au",
+								"value": "",
 								"type": "text",
-								"value": "application/json"
+								"disabled": true
 							}
 						],
 						"body": {
@@ -42,14 +42,11 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:5001/api/Game",
-							"protocol": "https",
+							"raw": "{{baseurl}}/Game",
 							"host": [
-								"localhost"
+								"{{baseurl}}"
 							],
-							"port": "5001",
 							"path": [
-								"api",
 								"Game"
 							]
 						}
@@ -791,27 +788,7 @@
 							"script": {
 								"id": "97ad4eef-99b5-4a4d-896e-7e63d3bd14ab",
 								"exec": [
-									"const response = pm.response.json();",
-									"",
-									"let tmplt = `",
-									"    <table>",
-									"        <tr><td>{{one}}</td><td>{{two}}</td><td>{{three}}</td></tr>",
-									"        <tr><td>{{four}}</td><td>{{five}}</td><td>{{six}}</td></tr>",
-									"        <tr><td>{{seven}}</td><td>{{eight}}</td><td>{{nine}}</td></tr>",
-									"    </table>`;",
-									"    ",
-									"pm.visualizer.set(tmplt, {response:",
-									"{",
-									"    'one': response.board.squares[0],",
-									"    'two': response.board.squares[1],",
-									"    'three': response.board.squares[2],",
-									"    'four': response.board.squares[3],",
-									"    'five': response.board.squares[4],",
-									"    'six': response.board.squares[5],",
-									"    'seven': response.board.squares[6],",
-									"    'eight': response.board.squares[7],",
-									"    'nine': response.board.squares[8]",
-									"}});"
+									""
 								],
 								"type": "text/javascript"
 							}

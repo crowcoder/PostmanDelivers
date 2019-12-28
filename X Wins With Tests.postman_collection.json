@@ -2112,7 +2112,8 @@
 							"path": [
 								"Game"
 							]
-						}
+						},
+						"description": "This request will retrieve all games ever played"
 					},
 					"response": []
 				},
