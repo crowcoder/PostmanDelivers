@@ -1,0 +1,42 @@
+[
+  {
+    "move_one": 1,
+    "move_two": 2,
+    "move_three": 3,
+    "move_four": 4,
+    "move_five": 5,
+    "move_six": 6
+  },
+  {
+    "move_one": 6,
+    "move_two": 7,
+    "move_three": 4,
+    "move_four": 3,
+    "move_five": 2,
+    "move_six": 1
+  },
+  {
+    "move_one": 1,
+    "move_two": 2,
+    "move_three": 7,
+    "move_four": 4,
+    "move_five": 5,
+    "move_six": 6
+  },
+  {
+    "move_one": 1,
+    "move_two": 2,
+    "move_three": 3,
+    "move_four": 8,
+    "move_five": 8,
+    "move_six": 6
+  },
+  {
+    "move_one": 1,
+    "move_two": 0,
+    "move_three": 10,
+    "move_four": 40,
+    "move_five": 50,
+    "move_six": 16
+  }
+]

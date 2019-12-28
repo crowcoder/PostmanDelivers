@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using TikTakToe.Engine;
@@ -16,7 +17,7 @@ namespace PostmanDelivers.API.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Game> Post(string[] playerNames)
+        public ActionResult<Game> Post([FromBody]string[] playerNames)
         {
             try
             {
@@ -32,6 +33,7 @@ namespace PostmanDelivers.API.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("{id:int}")]
         public ActionResult Delete(int id)
         {
